@@ -26,13 +26,15 @@ Starting extend our store. Please append ability user to interact with our store
 
 Add support of such commands: 
 
-- `sort` - products from store according config. In resources folder create xml config file like
->xml
-><sort>
->    <name>asc</name>
->    <price>asc</price>
->    <rate>desc</rate>
-></sort>
+- `sort` - products from store according config. In resources folder create xml config file like 
+```
+xml
+<sort>
+    <name>asc</name>
+    <price>asc</price>
+    <rate>desc</rate>
+</sort>
+```
 Config file can contains from 1 to N fields. Sort should be done using `Comparator`. Sort and print should not modify
  default store product lists and their order.
   
