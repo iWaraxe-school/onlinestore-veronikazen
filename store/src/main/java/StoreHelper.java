@@ -6,7 +6,7 @@ import java.util.*;
 
 public class StoreHelper{
 
-    Store store;
+    private Store store;
 
     public StoreHelper(Store store) {
         this.store = store;
