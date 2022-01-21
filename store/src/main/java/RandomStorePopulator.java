@@ -1,39 +1,37 @@
-import category.Category;
-import category.Fruit;
-import category.Spice;
-import category.Vegetable;
+import categories.Category;
+import categories.Fruit;
+import categories.Spice;
+import categories.Vegetable;
 import com.github.javafaker.Faker;
-import product.Product;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RandomStorePopulator {
 
-    public List<Product> fillProductList(String className) {
-        Faker faker = new Faker();
-        Random random = new Random();
-        List <Product> productList = new ArrayList<>();
-        if (className.equals(Fruit.class.getSimpleName())) {
-            for (int i = 0; i < random.nextInt(5)+1; i++) {
-                productList.add(new Product(faker.food().fruit(), random.nextInt(100),
-                        (double)(Math.round(random.nextDouble()*10000))/100));
-            }
-        } else if (className.equals(Vegetable.class.getSimpleName())) {
-            for (int i = 0; i < random.nextInt(5)+1; i++) {
-                productList.add(new Product(faker.food().vegetable(), random.nextInt(100),
-                        (double)(Math.round(random.nextDouble()*10000))/100));
-            }
-        } else if (className.equals(Spice.class.getSimpleName())) {
-            for (int i = 0; i < random.nextInt(5)+1; i++) {
-                productList.add(new Product(faker.food().spice(), random.nextInt(100),
-                        (double)(Math.round(random.nextDouble()*10000))/100));
-            }
-        }
-        return productList;
+    private final Faker faker;
+
+    public RandomStorePopulator() {
+        faker = new Faker();
     }
 
-    public <T extends Category>  void initProductList (T obj) {
-        obj.setProductList(fillProductList(obj.getClass().getSimpleName()));
+    public String fillName(Class<? extends Category> categoryName) {
+        String fakerProductName = null;
+        if (categoryName==Fruit.class) {
+            fakerProductName = faker.food().fruit();
+        } else if (categoryName==Vegetable.class) {
+            fakerProductName = faker.food().vegetable();
+        } else if (categoryName==Spice.class) {
+            fakerProductName = faker.food().spice();
+        }
+        return fakerProductName;
+    }
+
+    public int fillRate() {
+        Random random = new Random();
+        return random.nextInt(100);
+    }
+
+    public double fillPrice() {
+        Random random = new Random();
+        return (double)(Math.round(random.nextDouble()*10000))/100;
     }
 }

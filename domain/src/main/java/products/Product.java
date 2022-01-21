@@ -1,4 +1,4 @@
-package product;
+package products;
 
 public class Product {
 
@@ -14,8 +14,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "\n" + "name='" + name + '\'' +
-                ", rate=" + rate +
-                ", price=" + price;
+        return "name='" + name + '\'' +
+                "; rate=" + rate +
+                "; price=" + price + "\n";
     }
 }
