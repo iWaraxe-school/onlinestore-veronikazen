@@ -1,33 +1,40 @@
-### 3. OOP
+## 4. Collections
 
 ----
-#### Materials
+### Materials
 
-[OOP](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
+[Collections](https://docs.oracle.com/javase/tutorial/collections/index.html)
 
-[Lecture 3](https://coherentsolutions.sharepoint.com/sites/training-center/_layouts/15/WopiFrame.aspx?sourcedoc=%7b21357CB9-7D9D-4E18-AD42-22ADC9979308%7d&file=L3.pptx&action=default)
+[Lecture 9](https://coherentsolutions.sharepoint.com/sites/training-center/_layouts/15/WopiFrame.aspx?sourcedoc=%7bEF21525C-52B3-45A0-8E14-71BFC9BAB74E%7d&file=L9.pptx&action=default)
 
-[Lecture 4](https://coherentsolutions.sharepoint.com/sites/training-center/_layouts/15/WopiFrame.aspx?sourcedoc=%7b87729213-AD13-40A5-876C-67E647EC725A%7d&file=L4.pptx&action=default)
+[XML](https://en.wikipedia.org/wiki/XML)
 
-[Reflection](https://docs.oracle.com/javase/tutorial/reflect/)
+[XML processing](https://docs.oracle.com/javase/tutorial/jaxp/)
 
-[Reflections Lib](https://github.com/ronmamo/reflections)
+### VideoLectures
+- [Collections, Lists, Sets, Unmodifiable Lists and Sets](https://drive.google.com/file/d/1uC3XlEtUI9rk6bYx-OBsF9PFcRfZjxDv/view?usp=sharing)
+- [Lists, Sets, Maps, Unmodifiable Maps](https://drive.google.com/file/d/1wH8SLzZ\_tl97rk9AAc10uWf11oOWrcxQ/view?usp=sharing)
+- [Generics (part 1)](https://drive.google.com/file/d/1k4DkEOh40x6vqLu9qVQo7O19tRkElzMd/view?usp=sharing)
+- [Generics (part 2)](https://drive.google.com/file/d/1zJxJqgGjLE37Rdaf-2iUAf5FXcvcGY8Y/view?usp=sharing)
+- [Functional Interfaces, Introduction to lambdas](https://drive.google.com/file/d/1HFDFxDMCyBZeSAR8wGp2WIZoFlvHw1g4/view?usp=sharing)
+- [Lambdas](https://drive.google.com/file/d/1Oak\_SFxlFczz\_gBItECTDEiAyp7awzLC/view?usp=sharing)
+- [Stream API](https://drive.google.com/file/d/1YPm2XcxsVy3zDC6kkDBu16Ca7V5duhJn/view?usp=sharing)
 
-[Faker](https://github.com/DiUS/java-faker)
+### Task #4
 
-#### Task #3
+Starting extend our store. Please append ability user to interact with our store, while sending commands thru read stream.
 
-Before start creating source code, read carefully all materials about OOP. It is not only 3 principles for interview;)
+Add support of such commands: 
 
-Store functionality should be based on above principles.
-
-Classes to create:
-
-- `Product` with such attributes as [name, rate, price]
-- `Category` classes with the name attribute, for each store category [bike, phone, milk] and products list
-- `Store` - class that should handle category list
-- `RandomStorePopulator` - utility class that will populate out store/category with fake data using `Faker` lib
-- `StoreApp` - class with main method to execute our store scenario.
-
-When invoke main method, application should init store with categories and products and `pretty` print this data.
-Also, categories should be read dynamically (at runtime), from base category package using `reflections` lib.
+- `sort` - products from store according config. In resources folder create xml config file like
+>xml
+><sort>
+>    <name>asc</name>
+>    <price>asc</price>
+>    <rate>desc</rate>
+></sort>
+Config file can contains from 1 to N fields. Sort should be done using `Comparator`. Sort and print should not modify
+ default store product lists and their order.
+  
+- `top` - print top 5 products sorted via price desc
+- `quit` - exit app
