@@ -1,6 +1,10 @@
+package helpers;
+
 import categories.Category;
 import org.reflections.Reflections;
 import products.Product;
+import store.RandomStorePopulator;
+import store.Store;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 

@@ -1,3 +1,5 @@
+package store;
+
 import categories.Category;
 import categories.Fruit;
 import categories.Spice;

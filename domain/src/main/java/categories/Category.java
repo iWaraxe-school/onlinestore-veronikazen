@@ -13,6 +13,10 @@ public abstract class Category {
         this.productList = productList;
     }
 
+    public List<Product> getProductList() {
+        return productList;
+    }
+
     @Override
     public String toString() {
         return "\n" + "Category name:'" + name.replaceAll("categories.", "") + '\'' + "\n" +
