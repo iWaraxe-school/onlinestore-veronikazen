@@ -2,9 +2,12 @@ package helpers;
 
 import categories.Category;
 import org.reflections.Reflections;
+import org.xml.sax.SAXException;
 import products.Product;
 import store.RandomStorePopulator;
 import store.Store;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -46,5 +49,19 @@ public class StoreHelper{
                 e.printStackTrace();
             }
         }
+    }
+
+    public String sortProductList() throws ParserConfigurationException, IOException, SAXException {
+        List<Product> allProductList = store.getProductList();
+        Collections.sort(allProductList, new ProductComparator(new XmlReader().readSortMethods()));
+        return allProductList.toString().replaceAll("\\[|\\]|, ", "");
+    }
+
+    public String getTopViaPriceDesc() {
+        List<Product> allProductList = store.getProductList();
+        Map<String, String> sortMap = new HashMap<>();
+        sortMap.put("price", SortOrder.DESC.toString());
+        Collections.sort(allProductList, new ProductComparator(sortMap));
+        return new ArrayList<>(allProductList.subList(0,5)).toString().replaceAll("\\[|\\]|, ", "");
     }
 }

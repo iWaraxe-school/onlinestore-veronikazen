@@ -2,9 +2,9 @@ package products;
 
 public class Product {
 
-    private String name;
-    private int rate;
-    private double price;
+    public String name;
+    public int rate;
+    public double price;
 
     public Product(String name, int rate, double price) {
         this.name = name;
