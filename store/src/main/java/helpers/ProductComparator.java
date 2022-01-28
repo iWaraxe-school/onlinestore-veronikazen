@@ -2,6 +2,8 @@ package helpers;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import products.Product;
+
+import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -35,6 +37,8 @@ public class ProductComparator implements Comparator<Product> {
 
     public static String getSortProperty(Product product, String property) throws NoSuchFieldException,
             IllegalAccessException {
-        return product.getClass().getDeclaredField(property).get(product).toString();
+        Field field = product.getClass().getDeclaredField(property);
+        field.setAccessible(true);
+        return field.get(product).toString();
     }
 }
