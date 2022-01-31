@@ -14,6 +14,18 @@ import java.util.*;
 
 public class XmlReader {
 
+    private static XmlReader xmlReader;
+
+    private XmlReader() {
+    }
+
+    public static XmlReader getInstance() {
+        if (xmlReader==null) {
+            xmlReader = new XmlReader();
+        }
+        return xmlReader;
+    }
+
     public Map<String, String> readSortMethods() throws ParserConfigurationException, IOException, SAXException {
         String filePath = "store/src/main/resources/config.xml";
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
