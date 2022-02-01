@@ -7,9 +7,17 @@ import java.util.*;
 public class Store {
 
     private List<Category> categoryList;
+    private static Store store;
 
-    public Store() {
+    private Store() {
         categoryList = new ArrayList<>();
+    }
+
+    public static Store getInstance() {
+        if (store==null) {
+            store = new Store();
+        }
+        return store;
     }
 
     public <T extends Category> void setCategoryList(T obj) {

@@ -1,4 +1,4 @@
-package helpers;
+package helpers.comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import products.Product;

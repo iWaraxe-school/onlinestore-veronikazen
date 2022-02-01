@@ -1,6 +1,8 @@
 package helpers;
 
 import categories.Category;
+import helpers.comparator.ProductComparator;
+import helpers.comparator.SortOrder;
 import org.reflections.Reflections;
 import org.xml.sax.SAXException;
 import products.Product;
