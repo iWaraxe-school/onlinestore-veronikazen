@@ -53,7 +53,7 @@ public class StoreHelper{
 
     public String sortProductList() throws ParserConfigurationException, IOException, SAXException {
         List<Product> allProductList = store.getProductList();
-        Collections.sort(allProductList, new ProductComparator(new XmlReader().readSortMethods()));
+        Collections.sort(allProductList, new ProductComparator(XmlReader.getInstance().readSortMethods()));
         return allProductList.toString().replaceAll("\\[|\\]|, ", "");
     }
 

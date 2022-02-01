@@ -2,7 +2,6 @@ package helpers;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import products.Product;
-
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.Map;
