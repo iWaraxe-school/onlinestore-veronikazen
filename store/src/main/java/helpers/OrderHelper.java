@@ -2,13 +2,16 @@ package helpers;
 
 import lombok.SneakyThrows;
 import order.Order;
+import order.OrderCleaner;
 import products.Product;
 import store.Store;
 import java.util.List;
+import java.util.Timer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OrderHelper {
 
+    public CopyOnWriteArrayList<Order> purchasedGoods = new CopyOnWriteArrayList<>();
     private static OrderHelper orderHelper;
 
     private OrderHelper() {
@@ -20,8 +23,6 @@ public class OrderHelper {
         }
         return orderHelper;
     }
-
-    public CopyOnWriteArrayList<Order> purchasedGoods = new CopyOnWriteArrayList<>();
 
     @SneakyThrows
     public Product selectProductByName(List<Product> productList, String productName) {
@@ -44,4 +45,8 @@ public class OrderHelper {
         purchasedGoods.add(order);
     }
 
+    public void cleanPurchasedGoods(CopyOnWriteArrayList<Order> purchasedGoods) {
+        Timer timer = new Timer();
+        timer.schedule(new OrderCleaner(), 120000);
+    }
 }
