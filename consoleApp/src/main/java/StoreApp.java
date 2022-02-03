@@ -10,6 +10,9 @@ public class StoreApp {
         StoreHelper storeHelper = new StoreHelper();
         storeHelper.fillStoreRandomly();
         onlineStore.printAllCategories();
+
+        OrderHelper.getInstance().cleanPurchasedGoods();
+
         Scanner scanner = new Scanner(System.in);
         boolean flag = true;
         while (flag) {
@@ -35,6 +38,5 @@ public class StoreApp {
                     System.out.println("Unidentified operation");
             }
         }
-
     }
 }

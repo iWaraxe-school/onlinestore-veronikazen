@@ -2,11 +2,11 @@ package helpers;
 
 import lombok.SneakyThrows;
 import order.Order;
-import order.OrderCleaner;
 import products.Product;
 import store.Store;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OrderHelper {
@@ -43,10 +43,20 @@ public class OrderHelper {
 
     public void addOrderToPurchasedGoods(Order order) {
         purchasedGoods.add(order);
+        System.out.println(purchasedGoods);
     }
 
-    public void cleanPurchasedGoods(CopyOnWriteArrayList<Order> purchasedGoods) {
+    public void cleanPurchasedGoods() {
         Timer timer = new Timer();
-        timer.schedule(new OrderCleaner(), 120000);
+        timer.schedule(new OrderCleaner(), 100,120000);
+    }
+
+    public class OrderCleaner extends TimerTask {
+
+        @Override
+        public void run() {
+            purchasedGoods.clear();
+        }
+
     }
 }
