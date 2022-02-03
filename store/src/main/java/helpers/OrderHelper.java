@@ -43,7 +43,6 @@ public class OrderHelper {
 
     public void addOrderToPurchasedGoods(Order order) {
         purchasedGoods.add(order);
-        System.out.println(purchasedGoods);
     }
 
     public void cleanPurchasedGoods() {
