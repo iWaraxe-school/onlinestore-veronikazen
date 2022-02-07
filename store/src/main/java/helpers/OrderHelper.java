@@ -1,12 +1,9 @@
 package helpers;
 
-import lombok.SneakyThrows;
 import order.Order;
 import products.Product;
 import store.Store;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OrderHelper {
@@ -24,7 +21,6 @@ public class OrderHelper {
         return orderHelper;
     }
 
-    @SneakyThrows
     public Product selectProductByName(List<Product> productList, String productName) {
         Product selectedProduct = null;
         for (Product product : productList) {
@@ -45,17 +41,4 @@ public class OrderHelper {
         purchasedGoods.add(order);
     }
 
-    public void cleanPurchasedGoods() {
-        Timer timer = new Timer();
-        timer.schedule(new OrderCleaner(), 100,120000);
-    }
-
-    public class OrderCleaner extends TimerTask {
-
-        @Override
-        public void run() {
-            purchasedGoods.clear();
-        }
-
-    }
 }
