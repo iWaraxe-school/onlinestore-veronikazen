@@ -3,11 +3,13 @@ package helpers;
 import categories.Category;
 import helpers.comparator.ProductComparator;
 import helpers.comparator.SortOrder;
-import lombok.SneakyThrows;
 import org.reflections.Reflections;
+import org.xml.sax.SAXException;
 import products.Product;
 import store.RandomStorePopulator;
 import store.Store;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -45,8 +47,7 @@ public class StoreHelper{
         }
     }
 
-    @SneakyThrows
-    public String sortProductList() {
+    public String sortProductList() throws ParserConfigurationException, IOException, SAXException {
         List<Product> allProductList = Store.getInstance().getProductList();
         Collections.sort(allProductList, new ProductComparator(XmlReader.getInstance().readSortMethods()));
         return allProductList.toString().replaceAll("\\[|\\]|, ", "");
