@@ -1,6 +1,8 @@
 package helpers;
 
 import categories.Category;
+import helpers.comparator.ProductComparator;
+import helpers.comparator.SortOrder;
 import org.reflections.Reflections;
 import org.xml.sax.SAXException;
 import products.Product;
@@ -12,12 +14,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class StoreHelper{
-
-    private Store store;
-
-    public StoreHelper(Store store) {
-        this.store = store;
-    }
 
     public Map<Class<? extends Category>, Integer> createCategoryMap() {
         Map<Class<? extends Category>, Integer> categoryMap = new HashMap<>();
@@ -41,7 +37,7 @@ public class StoreHelper{
             }
             try {
                 Class[] params = {String.class, List.class};
-                store.setCategoryList(categoryName.getConstructor(params).newInstance(categoryName.getName(),
+                Store.getInstance().setCategoryList(categoryName.getConstructor(params).newInstance(categoryName.getName(),
                         productList));
             }
             catch (NoSuchMethodException | InstantiationException| IllegalAccessException|
@@ -52,16 +48,17 @@ public class StoreHelper{
     }
 
     public String sortProductList() throws ParserConfigurationException, IOException, SAXException {
-        List<Product> allProductList = store.getProductList();
+        List<Product> allProductList = Store.getInstance().getProductList();
         Collections.sort(allProductList, new ProductComparator(XmlReader.getInstance().readSortMethods()));
         return allProductList.toString().replaceAll("\\[|\\]|, ", "");
     }
 
     public String getTopViaPriceDesc() {
-        List<Product> allProductList = store.getProductList();
+        List<Product> allProductList = Store.getInstance().getProductList();
         Map<String, String> sortMap = new HashMap<>();
         sortMap.put("price", SortOrder.DESC.toString());
         Collections.sort(allProductList, new ProductComparator(sortMap));
         return new ArrayList<>(allProductList.subList(0,5)).toString().replaceAll("\\[|\\]|, ", "");
     }
+
 }
