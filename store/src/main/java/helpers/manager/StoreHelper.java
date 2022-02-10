@@ -1,9 +1,11 @@
-package helpers;
+package helpers.manager;
 
 import categories.Category;
+import helpers.OrderHelper;
+import helpers.TimerCleanupTask;
+import helpers.XmlReader;
 import helpers.comparator.ProductComparator;
 import helpers.comparator.SortOrder;
-import org.reflections.Reflections;
 import org.xml.sax.SAXException;
 import products.Product;
 import store.RandomStorePopulator;
@@ -13,19 +15,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class StoreHelper{
+public class StoreHelper extends Manager{
 
-    public Map<Class<? extends Category>, Integer> createCategoryMap() {
-        Map<Class<? extends Category>, Integer> categoryMap = new HashMap<>();
-        Reflections reflections = new Reflections("categories");
-        Random random = new Random();
-        Set<Class<? extends Category>> subTypes = reflections.getSubTypesOf(Category.class);
-        for (Class<? extends Category> subType : subTypes) {
-            categoryMap.put(subType, random.nextInt(5) + 1);
-        }
-        return categoryMap;
-    }
-
+    @Override
     public void fillStoreRandomly() {
         RandomStorePopulator randomStorePopulator = new RandomStorePopulator();
         Map<Class<? extends Category>,Integer> map = createCategoryMap();
@@ -43,6 +35,41 @@ public class StoreHelper{
             catch (NoSuchMethodException | InstantiationException| IllegalAccessException|
                     InvocationTargetException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void manageStore() throws ParserConfigurationException, IOException, SAXException {
+        fillStoreRandomly();
+        StoreHelper storeHelper = new StoreHelper();
+        Store.getInstance().printAllCategories();
+
+        TimerCleanupTask.getInstance().cleanPurchasedGoods();
+
+        Scanner scanner = new Scanner(System.in);
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter operation: sort/top5 by price/create order/quit");
+            String operation = scanner.nextLine();
+            switch (operation) {
+                case "sort":
+                    System.out.println(storeHelper.sortProductList());
+                    break;
+                case "top5 by price":
+                    System.out.println(storeHelper.getTopViaPriceDesc());
+                    break;
+                case "quit":
+                    System.out.println("Successful quit");
+                    flag = false;
+                    break;
+                case "create order":
+                    System.out.println("Enter name of product to order:");
+                    String productName = scanner.nextLine();
+                    OrderHelper.getInstance().createOrder(productName);
+                    break;
+                default:
+                    System.out.println("Unidentified operation");
             }
         }
     }
