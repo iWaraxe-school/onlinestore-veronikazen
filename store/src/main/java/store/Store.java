@@ -24,8 +24,12 @@ public class Store {
         categoryList.add(obj);
     }
 
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
     public void printAllCategories() {
-        System.out.println(categoryList.toString().replaceAll("(\\[|\\]|, )", ""));
+        System.out.println(getCategoryList().toString().replaceAll("(\\[|\\]|, )", ""));
     }
 
     public List<Product> getProductList() {

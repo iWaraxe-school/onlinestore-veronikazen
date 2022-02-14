@@ -9,7 +9,7 @@ public class StoreApp {
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException,
             SQLException, ClassNotFoundException {
-        System.out.println("Please, enter store type (DataBase store/App store):");
+        System.out.println("Please, enter store type (DataBase store/App store/Http store):");
         Scanner scanner = new Scanner(System.in);
         String storeType = scanner.nextLine();
         Manager manager = Manager.createStoreByType(storeType);
