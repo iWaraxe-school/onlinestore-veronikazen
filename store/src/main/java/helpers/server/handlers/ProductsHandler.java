@@ -7,7 +7,7 @@ import store.Store;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class BasicHandler implements HttpHandler {
+public class ProductsHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
