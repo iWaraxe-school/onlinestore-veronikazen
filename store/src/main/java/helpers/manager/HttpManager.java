@@ -1,6 +1,7 @@
 package helpers.manager;
 
 import categories.Category;
+import helpers.server.HttpClient;
 import helpers.server.Server;
 import products.Product;
 import store.RandomStorePopulator;
@@ -25,7 +26,8 @@ public class HttpManager extends Manager{
             }
             try {
                 Class[] params = {String.class, List.class};
-                Store.getInstance().setCategoryList(categoryName.getConstructor(params).newInstance(categoryName.getName(),
+                Store.getInstance().setCategoryList(categoryName.getConstructor(params).newInstance(categoryName.
+                                getName(),
                         productList));
             }
             catch (NoSuchMethodException | InstantiationException| IllegalAccessException|
@@ -39,7 +41,8 @@ public class HttpManager extends Manager{
     public void manageStore() throws IOException {
         Server server = new Server();
         server.bootstrap();
-        //сделать запрос на сервер
-        //в кач-ве респонса получаем данные по продукту
+        HttpClient client = new HttpClient();
+        client.getProducts();
+        client.addToCart();
     }
 }
