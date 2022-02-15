@@ -29,7 +29,10 @@ public abstract class Manager {
             return new DataBaseManager();
         } else if (type.equalsIgnoreCase("App store")) {
             return new StoreHelper();
-        } else throw new RuntimeException(type + "is unknown store type");
+        } else if (type.equalsIgnoreCase("Http store")) {
+            return new HttpManager();
+        }
+        else throw new RuntimeException(type + "is unknown store type");
     }
 
     public abstract void fillStoreRandomly() throws SQLException, ClassNotFoundException;
